@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../hooks/authHooks";
 
 const RegisterPage = () => {
-    const { navigate } = useAuth();
+    const { navigate, register, errors, handleSubmit, registerForm } = useAuth();
     return (
         <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4">
             <div className="w-full max-w-md bg-[#1A1A1A] border border-gray-800 rounded-2xl shadow-2xl p-6">
@@ -25,7 +25,9 @@ const RegisterPage = () => {
                     </p>
                 </div>
 
-                    <form className="space-y-4">
+                    <form 
+                    onSubmit={handleSubmit(registerForm)}
+                    className="space-y-4">
 
                         {/* Name & Email */}
                         <div className="grid grid-cols-2 gap-4">
@@ -35,10 +37,14 @@ const RegisterPage = () => {
                                 </label>
 
                                 <input
+                                    {...register("name", {
+                                        required:"name is required"
+                                    })}
                                     type="text"
                                     placeholder="John Doe"
                                     className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                                 />
+                                {errors.name && <p className="text-red-500">{errors.name.message}</p>}
                             </div>
 
                             <div>
@@ -47,10 +53,15 @@ const RegisterPage = () => {
                                 </label>
 
                                 <input
+                                    {...register("email", {
+                                        required:"email is required"
+                                    })}
                                     type="email"
+                                    autoComplete="email"
                                     placeholder="john@gmail.com"
                                     className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                                 />
+                                {errors.email && <p className="text-red-500">{errors.email.message}</p>}
                             </div>
                         </div>
 
@@ -62,10 +73,19 @@ const RegisterPage = () => {
                                 </label>
 
                                 <input
+                                    {...register("password", {
+                                        required:"password is required",
+                                        minLength:{
+                                            value:8,
+                                            message:"Minimum 8 Characters are required"
+                                        }
+                                    })}
                                     type="password"
+                                    autoComplete="current-password"
                                     placeholder="********"
                                     className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                                 />
+                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                             </div>
 
                             <div>
@@ -74,10 +94,19 @@ const RegisterPage = () => {
                                 </label>
 
                                 <input
+                                    {...register("password", {
+                                        required:"password is required",
+                                        minLength:{
+                                            value:8,
+                                            message:"Minimum 8 Characters are required"
+                                        }
+                                    })}
                                     type="password"
+                                    autoComplete="current-password"
                                     placeholder="********"
                                     className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                                 />
+                                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                             </div>
                         </div>
 
@@ -86,6 +115,7 @@ const RegisterPage = () => {
                             <input
                                 type="checkbox"
                                 className="accent-amber-500"
+                                required
                             />
                             I agree to the Terms & Conditions
                         </label>

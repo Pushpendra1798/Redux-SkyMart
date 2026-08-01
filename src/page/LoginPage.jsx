@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../hooks/authHooks";
 
 const LoginPage = () => {
-    const { navigate } = useAuth();
+    const { navigate, register, errors, handleSubmit, loginForm } = useAuth();
     return (
         <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4">
             <div className="w-full max-w-md bg-[#1A1A1A] border border-gray-800 rounded-2xl shadow-2xl p-6">
@@ -25,7 +25,9 @@ const LoginPage = () => {
                     </p>
                 </div>
 
-                <form className="space-y-3">
+                <form 
+                onSubmit={handleSubmit(loginForm)}
+                className="space-y-3">
 
                     {/* Email */}
                     <div>
@@ -34,10 +36,15 @@ const LoginPage = () => {
                         </label>
 
                         <input
+                            {...register("email", {
+                                required:"email is required"
+                            })}
                             type="email"
+                            autoComplete="email"
                             placeholder="john@gmail.com"
                             className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                         />
+                        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
                     </div>
 
                     {/* Password */}
@@ -47,10 +54,19 @@ const LoginPage = () => {
                         </label>
 
                         <input
+                            {...register("password", {
+                                required:"password is required",
+                                minLength:{
+                                    value:8,
+                                    message:"Minimum 8 Characters are required"
+                                }
+                            })}
                             type="password"
+                            autoComplete="current-password"
                             placeholder="********"
                             className="mt-1 w-full bg-[#262626] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500"
                         />
+                        {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                     </div>
 
                     {/* Remember Me & Forgot Password */}
