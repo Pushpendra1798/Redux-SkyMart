@@ -58,7 +58,7 @@ const ProductCard = ({ product }) => {
 
                         {/* Quantity */}
                         
-                        <div className="ml-12 flex items-center rounded-xl border border-[#C8F400] overflow-hidden">
+                        <div className="flex items-center rounded-xl border border-[#C8F400] overflow-hidden">
 
                             <button className="w-8 h-8 flex items-center justify-center bg-[#1A1A1A] text-white hover:bg-[#C8F400] hover:text-black transition">
                                 <Minus size={14} />
@@ -73,14 +73,13 @@ const ProductCard = ({ product }) => {
                             </button>
 
                         </div>
-
-
+                        {/* Add Button */}
+                        <button className="flex items-center gap-2 rounded-xl bg-[#C8F400] px-4 py-2 text-xs font-semibold text-black transition-all duration-300 hover:scale-105 active:scale-95">
+                            <ShoppingCart size={14} />
+                            Add
+                        </button>
                     </div>
-                    {/* Add Button */}
-                    <button className="flex items-center gap-2 rounded-xl bg-[#C8F400] px-4 py-2 text-xs font-semibold text-black transition-all duration-300 hover:scale-105 active:scale-95">
-                        <ShoppingCart size={14} />
-                        Add
-                    </button>
+
 
                 </div>
 

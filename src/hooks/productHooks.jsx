@@ -7,9 +7,9 @@ export const useProductApi = () => {
         staleTime:7000
     });
 
-    return (
+    return {
         isPending,
         data,
         error
-    )
+    }
 }
