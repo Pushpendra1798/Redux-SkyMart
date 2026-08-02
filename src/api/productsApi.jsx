@@ -3,6 +3,8 @@ import { axiosInstance } from "../config/axiosInstance";
 let getProductsData = async () => {
     try {
         let res = await axiosInstance.get("/products");
+        console.log("api call running....");
+        
         return res.data.products
     } catch (error) {
         console.log("Errors in Producs API", error);
