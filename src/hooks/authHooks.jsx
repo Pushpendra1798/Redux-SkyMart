@@ -18,7 +18,7 @@ export const useAuth = () => {
         setRegisteredUsers(arr);
         localStorage.setItem("registeredUsers", JSON.stringify(arr));
         toast.success("user registered!")
-        
+        navigate("/");
     };
     const loginForm = (data) => {
         let user = registeredUsers.find((val)=>{
